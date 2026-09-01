@@ -50,6 +50,8 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
   App/bsp/*.c
 
   App/hw/*.c   
+
+  App/hw/driver/*.c 
 )
 
 # Add sources to executable
@@ -68,6 +70,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     App/bsp
 
     App/common
+
+    App/common/hw/include
 
     App/hw
 
