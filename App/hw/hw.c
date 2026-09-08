@@ -4,4 +4,5 @@ void hwInit(){
     bspInit();
 
     ledInit();
+    uartInit();
 }

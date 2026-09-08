@@ -74,7 +74,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     App/common/hw/include
 
     App/hw
-
 )
 
 # Add project symbols (macros)
