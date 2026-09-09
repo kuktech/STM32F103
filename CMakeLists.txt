@@ -52,6 +52,8 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
   App/hw/*.c   
 
   App/hw/driver/*.c 
+
+  App/common/core/*.c
 )
 
 # Add sources to executable
@@ -72,6 +74,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     App/common
 
     App/common/hw/include
+
+    App/common/core
 
     App/hw
 )

@@ -1,38 +1,29 @@
 #include "ap.h"
 #include "usbd_conf.h"
 
-extern uint32_t cdcAvailable();
-extern uint8_t cdcRead();
-extern void cdcDataIn(uint8_t rx_data);
-extern uint32_t cdcWrite(uint8_t *p_data, uint32_t length);
-
 void apInit(){
-   
+    uartOpen(_DEF_UART1, 57600);
+    uartOpen(_DEF_UART2, 57600);
 }
 
 void apMain(){
     uint32_t pre_time;
-    uint32_t pre_baud;
-
-    pre_baud = uartGetBaud(_DEF_UART1);
     pre_time = millis();
+    
     while(1){
         if(millis() - pre_time >= 500){
             pre_time  = millis();
             ledToggle(_DEF_LED1);
         }
-        
         if(uartAvailable(_DEF_UART1) > 0){
             uint8_t rx_data;
-
-            rx_data = uartRead(_DEF_UART1);
-
-            uartPrintf(_DEF_UART1, "RxData : %c 0x%X\n", rx_data, rx_data);
-
+            rx_data = uartRead(_DEF_UART2);
+            uartPrintf(_DEF_UART1, "USB Rx %c %X\n", rx_data, rx_data);
         }
-        if(uartGetBaud(_DEF_UART1 != pre_baud)){
-            uartPrintf(_DEF_UART1, "ChangedBaud : %d\n", uartGetBaud(_DEF_UART1));
+        if(uartAvailable(_DEF_UART2) > 0){
+            uint8_t rx_data;
+            rx_data = uartRead(_DEF_UART2);
+            uartPrintf(_DEF_UART2, "Uart1 Rx %c %X\n", rx_data, rx_data);
         }
-   
     }
 }
