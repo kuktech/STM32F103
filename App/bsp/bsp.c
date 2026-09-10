@@ -1,8 +1,5 @@
 #include "bsp.h"
-#include "stm32f1xx_hal_gpio.h"
-#include "stm32f1xx_hal_rcc.h"
-#include "stm32f1xx_hal_rcc_ex.h"
-
+#include "uart.h"
 #include "usb_device.h"
 
 void bspInit(){
@@ -19,6 +16,13 @@ void delay(uint32_t ms){
 
 uint32_t millis(){
     return HAL_GetTick();
+}
+
+int __io_putchar(int ch){
+  // USB로 printf 캐릭터 전송
+  uartWrite(_DEF_UART1, (uint8_t*)&ch, 1);
+
+  return 1;
 }
 
 void SystemClock_Config(void)

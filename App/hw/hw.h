@@ -4,4 +4,5 @@
 #include "usb.h"
 #include "rtc.h"
 #include "reset.h"
+#include "flash.h"
 void hwInit();

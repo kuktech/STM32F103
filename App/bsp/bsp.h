@@ -1,6 +1,14 @@
 #include "def.h"
 #include "stm32f1xx_hal.h"
 
+#define _USE_LOG_PRINT      1
+
+#if _USE_LOG_PRINT
+#define logPrintf(fmt, ...)     printf(fmt, #__VA_ARGS__)
+#else
+#define loglogPrintf(fmt, ...);
+#endif
+
 void bspInit();
 
 void delay(uint32_t ms);

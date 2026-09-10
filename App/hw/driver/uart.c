@@ -28,13 +28,15 @@ bool uartOpen(uint8_t ch, uint32_t baud){
             break;
         case _DEF_UART2:
             huart1.Instance = USART1;
-            huart1.Init.BaudRate = 115200;
+            huart1.Init.BaudRate = baud;
             huart1.Init.WordLength = UART_WORDLENGTH_8B;
             huart1.Init.StopBits = UART_STOPBITS_1;
             huart1.Init.Parity = UART_PARITY_NONE;
             huart1.Init.Mode = UART_MODE_TX_RX;
             huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
             huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+
+            HAL_UART_DeInit(&huart1);
 
             qbufferCreate(&qbuffer[_DEF_UART2], &rx_buf[0], 256);
 
@@ -134,11 +136,13 @@ uint32_t uartPrintf(uint8_t ch, char* fmt, ...){
 
 uint32_t uartGetBaud(uint8_t ch){
     uint32_t ret = 0;
-
+ 
     switch (ch) {
         case _DEF_UART1:
             ret = cdcGetBaud(ch);
             break;
+        case _DEF_UART2:
+            ret = huart1.Init.BaudRate;
     }
     return ret;
 }
