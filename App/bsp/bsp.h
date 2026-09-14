@@ -1,7 +1,6 @@
 #pragma once
 #include "def.h"
 #include "stm32f1xx_hal.h"
-#include "cmsis_os.h"
 
 #define _USE_LOG_PRINT      1
 

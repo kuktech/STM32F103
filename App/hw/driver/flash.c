@@ -1,6 +1,8 @@
 #include "flash.h"
 #include "stm32f1xx_hal_flash.h"
 
+#ifdef _USE_HW_FLASH
+
 #define FLASH_MAX_SECTOR    64
 
 typedef struct{
@@ -110,3 +112,5 @@ bool flashInSector(uint16_t sector_num, uint32_t addr, uint32_t length){
     }
     return ret;
 }
+
+#endif

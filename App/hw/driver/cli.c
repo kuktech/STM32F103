@@ -1,6 +1,8 @@
 #include "cli.h"
 #include "uart.h"
 
+#ifdef _USE_HW_CLI
+
 #define CLI_KEY_BACK              0x08
 #define CLI_KEY_DEL               0x7F
 #define CLI_KEY_ENTER             0x0D
@@ -746,3 +748,5 @@ void cliMemoryDump(cli_args_t *args)
     addr++;
   }
 }
+
+#endif

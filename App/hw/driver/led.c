@@ -2,6 +2,8 @@
 #include "cli.h"
 #include "usbd_conf.h"
 
+#ifdef _USE_HW_LED
+
 typedef struct{
     GPIO_TypeDef *port;
     uint16_t pin;
@@ -14,6 +16,7 @@ led_tbl_t led_tbl[LED_MAX_CH] = {
 };
 
 #ifdef _USE_HW_CLI
+
 static void cliLed(cli_args_t *args);
 #endif
 
@@ -79,5 +82,7 @@ void cliLed(cli_args_t *args){
         cliPrintf("led toggle ch[1~%d] time_ms\n", LED_MAX_CH);
     }
 }
+
+#endif
 
 #endif

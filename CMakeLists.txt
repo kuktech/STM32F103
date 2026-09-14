@@ -55,13 +55,6 @@ file(GLOB SRC_FILES CONFIGURE_DEPENDS
 
   App/common/core/*.c
   
-  FreeRTOS/Source/*.c
-
-  FreeRTOS/Source/CMSIS_RTOS/*.c
-
-  FreeRTOS/Source/portable/GCC/ARM_CM3/*.c
-
-  FreeRTOS/Source/portable/MemMang/*.c
 )
 
 # Add sources to executable
@@ -86,12 +79,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     App/common/core
 
     App/hw
-
-    FreeRTOS/Source/CMSIS_RTOS
-
-    FreeRTOS/Source/include
-
-  FreeRTOS/Source/portable/GCC/ARM_CM3
 )
 
 # Add project symbols (macros)
