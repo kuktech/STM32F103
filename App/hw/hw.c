@@ -2,7 +2,7 @@
 
 void hwInit(){
     bspInit();
-
+    cliInit();
     rtcInit();
     resetInit();
     

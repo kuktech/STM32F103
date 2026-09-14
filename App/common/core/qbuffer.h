@@ -1,3 +1,4 @@
+#pragma once
 #include "hw_def.h"
 
 #ifdef __cplusplus

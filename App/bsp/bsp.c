@@ -8,10 +8,31 @@ void bspInit(){
 
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
+  
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    GPIO_InitStruct.Pin = GPIO_PIN_12;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    
 }
 
-void delay(uint32_t ms){
+void delay(uint32_t ms)
+{
+#ifdef _USE_HW_RTOS
+  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+  {
+    osDelay(ms);
+  }
+  else
+  {
     HAL_Delay(ms);
+  }
+#else
+  HAL_Delay(ms);
+#endif
 }
 
 uint32_t millis(){
@@ -19,9 +40,7 @@ uint32_t millis(){
 }
 
 int __io_putchar(int ch){
-  // USB로 printf 캐릭터 전송
-  uartWrite(_DEF_UART1, (uint8_t*)&ch, 1);
-
+  uartWrite(_DEF_UART2, (uint8_t*)&ch, 1);
   return 1;
 }
 
